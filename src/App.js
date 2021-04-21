@@ -29,8 +29,8 @@ class App extends Component {
         this.setState({
             books: [
                 { bookName: event.target.value, price: "100" },
-                { bookName: "hDASSh", price: "500" },
-                { bookName: "test", price: "500" },
+                { bookName: "Bukhari Sharif", price: "500" },
+                { bookName: "Muslim Sharif", price: "500" },
                 { bookName: "Kholafaye Rashedin", price: "1200" }
             ]
         });
@@ -53,7 +53,7 @@ class App extends Component {
                     price={this.state.books[2].price} />
                 <Book bookName={this.state.books[3].bookName}
                     price={this.state.books[3].price}
-                    change={this.changeBookState.bind(this, "The Holy Quran")} />
+                    change={this.changeBookState.bind(this, "The Quran")} />
             </div>
         );
     }
