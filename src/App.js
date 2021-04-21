@@ -15,10 +15,20 @@ class App extends Component {
         ]
     }
 
-    changeBookState = () => {
+    changeBookState = newBookName => {
         this.setState({
             books: [
-                { bookName: "AFFFFA", price: "100" },
+                { bookName: newBookName, price: "100" },
+                { bookName: "hDASSh", price: "500" },
+                { bookName: "test", price: "500" },
+                { bookName: "Kholafaye Rashedin", price: "1200" }
+            ]
+        });
+    }
+    changeInputState = event => {
+        this.setState({
+            books: [
+                { bookName: event.target.value, price: "100" },
                 { bookName: "hDASSh", price: "500" },
                 { bookName: "test", price: "500" },
                 { bookName: "Kholafaye Rashedin", price: "1200" }
@@ -26,17 +36,24 @@ class App extends Component {
         });
     }
     render() {
-        console.log(this.state);
         return (
             <div className="App" >
                 <h1>
                     Book List
                 </h1>
-                <button onClick={this.changeBookState}>Change state</button>
-                <Book bookName={this.state.books[0].bookName} price={this.state.books[0].price} />
-                <Book bookName={this.state.books[1].bookName} price={this.state.books[1].price} />
-                <Book bookName={this.state.books[2].bookName} price={this.state.books[2].price} />
-                <Book bookName={this.state.books[3].bookName} price={this.state.books[3].price} />
+                <button onClick={() => this.changeBookState("The Quran")}>Change state</button>
+                <input type="text" onChange={this.changeInputState} />
+                <Book bookName={this.state.books[0].bookName}
+                    price={this.state.books[0].price} />
+                <Book bookName={this.state.books[1].bookName}
+                    price={this.state.books[1].price}
+                    inputName={this.changeInputState}
+                />
+                <Book bookName={this.state.books[2].bookName}
+                    price={this.state.books[2].price} />
+                <Book bookName={this.state.books[3].bookName}
+                    price={this.state.books[3].price}
+                    change={this.changeBookState.bind(this, "The Holy Quran")} />
             </div>
         );
     }
