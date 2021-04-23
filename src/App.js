@@ -42,6 +42,20 @@ class App extends Component {
             backgroundColor: "black",
             color: "white"
         };
+
+        //Creating Componenet List Start
+        //const bookState = this.state.books;
+        const books = this.state.books.map(item => {
+            return (
+                <Book
+                    bookName={item.bookName}
+                    price={item.price}
+                />
+            );
+        });
+        //Creating Componenet List End
+
+
         return (
             <div className="App" >
                 <h1 style={style}>
@@ -49,19 +63,9 @@ class App extends Component {
                 </h1>
                 <button onClick={() => this.changeBookState("The Quran")}>Change state</button>
                 <input type="text" onChange={this.changeInputState} />
-                <Book bookName={this.state.books[0].bookName}
-                    price={this.state.books[0].price} />
-                <Book bookName={this.state.books[1].bookName}
-                    price={this.state.books[1].price}
-                    inputName={this.changeInputState} />
-                <Book bookName={this.state.books[2].bookName}
-                    price={this.state.books[2].price} />
-                <Book bookName={this.state.books[3].bookName}
-                    price={this.state.books[3].price}
-                    change={this.changeBookState.bind(this, "The Quran")} />
+                {books}
             </div>
         );
     }
 }
-
 export default App;
