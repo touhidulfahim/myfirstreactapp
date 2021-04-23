@@ -3,7 +3,8 @@ import '../stylesheets/Book.css'
 const Book = props => {
     return (
         <div className='Book'>
-            <p>Book Name: {props.bookName}, Book Price: {props.price}</p>
+            <h3 onClick={props.delete}>Book Name: {props.bookName}</h3>
+            <h4>Book Price: {props.price}</h4>
             <input type="text" onChange={props.inputName} defaultValue={props.bookName} />
         </div>
     );

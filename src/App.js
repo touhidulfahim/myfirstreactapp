@@ -15,16 +15,19 @@ class App extends Component {
         ]
     }
 
-    changeBookState = newBookName => {
+    //Change State Delete Start
+    deleteBookState = index => {
+        //const books = this.state.books.slice();
+        //const books = this.state.books.map(item => item);
+        const books = [...this.state.books];
+        books.splice(index, 1);
         this.setState({
-            books: [
-                { bookName: newBookName, price: "100" },
-                { bookName: "hDASSh", price: "500" },
-                { bookName: "test", price: "500" },
-                { bookName: "Kholafaye Rashedin", price: "1200" }
-            ]
+            books: books
         });
-    }
+    };
+    //Change State Delete End
+
+
     changeInputState = event => {
         this.setState({
             books: [
@@ -45,24 +48,21 @@ class App extends Component {
 
         //Creating Componenet List Start
         //const bookState = this.state.books;
-        const books = this.state.books.map(item => {
+        const books = this.state.books.map((item, index) => {
             return (
                 <Book
                     bookName={item.bookName}
                     price={item.price}
+                    delete={() => this.deleteBookState(index)}
                 />
             );
         });
         //Creating Componenet List End
-
-
         return (
             <div className="App" >
                 <h1 style={style}>
                     Book List
                 </h1>
-                <button onClick={() => this.changeBookState("The Quran")}>Change state</button>
-                <input type="text" onChange={this.changeInputState} />
                 {books}
             </div>
         );
