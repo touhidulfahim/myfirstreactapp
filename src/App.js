@@ -36,9 +36,15 @@ class App extends Component {
         });
     }
     render() {
+        const style = {
+            border: "1px solid red",
+            borderRadius: "4px",
+            backgroundColor: "black",
+            color: "white"
+        };
         return (
             <div className="App" >
-                <h1>
+                <h1 style={style}>
                     Book List
                 </h1>
                 <button onClick={() => this.changeBookState("The Quran")}>Change state</button>
@@ -47,8 +53,7 @@ class App extends Component {
                     price={this.state.books[0].price} />
                 <Book bookName={this.state.books[1].bookName}
                     price={this.state.books[1].price}
-                    inputName={this.changeInputState}
-                />
+                    inputName={this.changeInputState} />
                 <Book bookName={this.state.books[2].bookName}
                     price={this.state.books[2].price} />
                 <Book bookName={this.state.books[3].bookName}
