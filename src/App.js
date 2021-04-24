@@ -8,10 +8,10 @@ import Book from './components/Book.js';
 class App extends Component {
     state = {
         books: [
-            { bookName: "The Holy Quran", price: "1500" },
-            { bookName: "Bukhari Sharif", price: "500" },
-            { bookName: "Muslim Sharif", price: "500" },
-            { bookName: "Kholafaye Rashedin", price: "1200" }
+            { id: 1, bookName: "The Holy Quran", price: "1500" },
+            { id: 2, bookName: "Bukhari Sharif", price: "500" },
+            { id: 3, bookName: "Muslim Sharif", price: "500" },
+            { id: 4, bookName: "Kholafaye Rashedin", price: "1200" }
         ]
     }
 
@@ -28,14 +28,15 @@ class App extends Component {
     //Change State Delete End
 
 
-    changeInputState = event => {
+    changeInputState = (event, index) => {
+        const book = {
+            ...this.state.books[index]
+        }
+        book.bookName = event.target.value;
+        const books = [...this.state.books];
+        books[index] = book;
         this.setState({
-            books: [
-                { bookName: event.target.value, price: "100" },
-                { bookName: "Bukhari Sharif", price: "500" },
-                { bookName: "Muslim Sharif", price: "500" },
-                { bookName: "Kholafaye Rashedin", price: "1200" }
-            ]
+            books: books
         });
     }
     render() {
@@ -54,6 +55,8 @@ class App extends Component {
                     bookName={item.bookName}
                     price={item.price}
                     delete={() => this.deleteBookState(index)}
+                    key={item.id}
+                    inputName={(event) => this.changeInputState(event, index)}
                 />
             );
         });
