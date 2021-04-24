@@ -12,7 +12,8 @@ class App extends Component {
             { id: 2, bookName: "Bukhari Sharif", price: "500" },
             { id: 3, bookName: "Muslim Sharif", price: "500" },
             { id: 4, bookName: "Kholafaye Rashedin", price: "1200" }
-        ]
+        ],
+        showBooks: true
     }
 
     //Change State Delete Start
@@ -39,6 +40,16 @@ class App extends Component {
             books: books
         });
     }
+
+    //toggle
+    toggleBooks = () => {
+        this.setState({
+            showBooks: !this.state.showBooks
+        })
+    }
+
+
+
     render() {
         const style = {
             border: "1px solid red",
@@ -49,23 +60,28 @@ class App extends Component {
 
         //Creating Componenet List Start
         //const bookState = this.state.books;
-        const books = this.state.books.map((item, index) => {
-            return (
-                <Book
-                    bookName={item.bookName}
-                    price={item.price}
-                    delete={() => this.deleteBookState(index)}
-                    key={item.id}
-                    inputName={(event) => this.changeInputState(event, index)}
-                />
-            );
-        });
+        let books = null;
+        if (this.state.showBooks) {
+            books = this.state.books.map((item, index) => {
+                return (
+                    <Book
+                        bookName={item.bookName}
+                        price={item.price}
+                        delete={() => this.deleteBookState(index)}
+                        key={item.id}
+                        inputName={(event) => this.changeInputState(event, index)}
+                    />
+                );
+            });
+        }
+
         //Creating Componenet List End
         return (
             <div className="App" >
                 <h1 style={style}>
                     Book List
                 </h1>
+                <button onClick={this.toggleBooks}>Show OR Hide Books</button>
                 {books}
             </div>
         );
