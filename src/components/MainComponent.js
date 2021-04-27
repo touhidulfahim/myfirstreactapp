@@ -6,9 +6,13 @@ import BookList from './lists/BookList'
 
 
 class MainComponent extends Component {
-    state = {
-        books: bookList,
-        showBooks: true
+    constructor(props) {
+        super(props);
+        this.state = {
+            books: bookList,
+            showBooks: true
+        }
+        console.log("Main Component")
     }
 
     //Change State Delete Start
@@ -43,9 +47,16 @@ class MainComponent extends Component {
         })
     }
 
+    UNSAFE_componentWillMount() {
+        console.log("Component will mount");
+    }
 
+    componentDidMount() {
+        console.log("Component did mount");
+    }
 
     render() {
+        console.log("main component render");
         const style = {
             border: "1px solid red",
             borderRadius: "4px",
