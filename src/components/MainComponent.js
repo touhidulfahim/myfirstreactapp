@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import bookList from '../assets/book.js'
 import BookList from './lists/BookList'
 import NewBook from './representational/NewBook'
-
+import { Route, NavLink } from 'react-router-dom'
 
 
 class MainComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            books: bookList,
-            showBooks: true
+            books: bookList
         }
     }
 
@@ -39,49 +38,27 @@ class MainComponent extends Component {
         });
     }
 
-    //toggle
-    toggleBooks = () => {
-        this.setState({
-            showBooks: !this.state.showBooks
-        })
-    }
 
     render() {
-        const style = {
-            border: "1px solid red",
-            borderRadius: "4px",
-            backgroundColor: "black",
-            color: "white"
-        };
-
         //Creating Componenet List Start
         //const bookState = this.state.books;
-        let books = null;
-        if (this.state.showBooks) {
-            books = <BookList books={this.state.books}
-                deleteBookState={this.deleteBookState}
-                changeInputState={this.changeInputState}
-            />
-        }
+        const books = <BookList books={this.state.books}
+            deleteBookState={this.deleteBookState}
+            changeInputState={this.changeInputState}
+        />
 
         //Creating Componenet List End
         return (
             <div className="App" >
-                <div className="nav-bar">
+                <nav className="nav-bar">
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/">Book</a></li>
+                        <li><NavLink to="/" exact>Home</NavLink></li>
+                        <li><NavLink to="/new-book">Book</NavLink></li>
                     </ul>
-                </div>
-
-
-                <h1 style={style}>
-                    Book List
-                </h1>
-                <button onClick={this.toggleBooks}>Show OR Hide Books</button>
-                {books}
-                <NewBook />
-            </div>
+                </nav>
+                <Route path="/" exact render={() => books} />
+                <Route path="/new-book" exact component={NewBook} />
+            </div >
         );
     }
 }
