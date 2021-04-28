@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Book from '../representational/Book.js'
+import { withRouter } from 'react-router-dom'
+
+
+
 
 class BookList extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
+        console.log(this.props);
         return (
             this.props.books.map((item, index) => {
                 return (
@@ -24,4 +25,4 @@ class BookList extends Component {
     }
 }
 
-export default BookList;
+export default withRouter(BookList);
