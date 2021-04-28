@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import bookList from '../assets/book.js'
 import BookList from './lists/BookList'
-
+import NewBook from './representational/NewBook'
 
 
 
@@ -12,7 +12,6 @@ class MainComponent extends Component {
             books: bookList,
             showBooks: true
         }
-        console.log("Main Component")
     }
 
     //Change State Delete Start
@@ -47,35 +46,7 @@ class MainComponent extends Component {
         })
     }
 
-    componentDidMount() {
-        console.log("Component did mount");
-    }
-
-
-
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log("U Main Component Should Componenet Update", nextProps, nextState);
-        return true;
-    }
-
-
-    componentDidUpdate() {
-        console.log("U component U Update");
-    }
-
-
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        console.log("Get Derived Component", nextProps, prevState);
-        return prevState;
-    }
-
-    getSnapshotBeforeUpdate() {
-        console.log("U main component getSnapshotBeforeUpdate");
-    }
-
     render() {
-        console.log("main component render");
         const style = {
             border: "1px solid red",
             borderRadius: "4px",
@@ -96,11 +67,20 @@ class MainComponent extends Component {
         //Creating Componenet List End
         return (
             <div className="App" >
+                <div className="nav-bar">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/">Book</a></li>
+                    </ul>
+                </div>
+
+
                 <h1 style={style}>
                     Book List
                 </h1>
                 <button onClick={this.toggleBooks}>Show OR Hide Books</button>
                 {books}
+                <NewBook />
             </div>
         );
     }
