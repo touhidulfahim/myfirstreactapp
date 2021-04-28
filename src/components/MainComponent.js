@@ -47,12 +47,31 @@ class MainComponent extends Component {
         })
     }
 
-    UNSAFE_componentWillMount() {
-        console.log("Component will mount");
-    }
-
     componentDidMount() {
         console.log("Component did mount");
+    }
+
+
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log("U Main Component Should Componenet Update", nextProps, nextState);
+        return true;
+    }
+
+
+    componentDidUpdate() {
+        console.log("U component U Update");
+    }
+
+
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        console.log("Get Derived Component", nextProps, prevState);
+        return prevState;
+    }
+
+    getSnapshotBeforeUpdate() {
+        console.log("U main component getSnapshotBeforeUpdate");
     }
 
     render() {
