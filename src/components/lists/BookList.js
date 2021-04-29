@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 
 
-
 class BookList extends Component {
     render() {
         return (
