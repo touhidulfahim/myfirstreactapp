@@ -3,65 +3,46 @@ import bookList from '../assets/book.js'
 import BookList from './lists/BookList'
 import NewBook from './representational/NewBook'
 import { Route, NavLink } from 'react-router-dom'
-
+import BookDetail from './representational/BookDetail'
 
 class MainComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            books: bookList
+            books: bookList,
+            selectedBook: null
         }
     }
 
-    //Change State Delete Start
-    deleteBookState = index => {
-        //const books = this.state.books.slice();
-        //const books = this.state.books.map(item => item);
-        const books = [...this.state.books];
-        books.splice(index, 1);
+    selectedBookHandler = bookId => {
+        const book = this.state.books.filter(book =>
+            book.id === bookId)[0];
         this.setState({
-            books: books
-        });
-    };
-    //Change State Delete End
-
-
-    changeInputState = (event, index) => {
-        const book = {
-            ...this.state.books[index]
-        }
-        book.bookName = event.target.value;
-        const books = [...this.state.books];
-        books[index] = book;
-        this.setState({
-            books: books
-        });
+            selectedBook: book
+        })
     }
-
 
     render() {
-        //Creating Componenet List Start
-        //const bookState = this.state.books;
-        const books = <BookList books={this.state.books}
-            deleteBookState={this.deleteBookState}
-            changeInputState={this.changeInputState}
+
+        const books = <BookList
+            books={this.state.books}
+            selectedBookHandler={this.selectedBookHandler}
         />
 
-        //Creating Componenet List End
         return (
-            <div className="App" >
+            <div className="App">
                 <nav className="nav-bar">
                     <ul>
                         <li><NavLink to="/" exact>Home</NavLink></li>
-                        <li><NavLink to="/new-book">Book</NavLink></li>
+                        <li><NavLink to="/new-book">New Book</NavLink></li>
                     </ul>
                 </nav>
                 <Route path="/" exact render={() => books} />
                 <Route path="/new-book" exact component={NewBook} />
-            </div >
+                <BookDetail book={this.state.selectedBook} />
+            </div>
         );
     }
 }
 
-
-export default MainComponent
+export default MainComponent;
