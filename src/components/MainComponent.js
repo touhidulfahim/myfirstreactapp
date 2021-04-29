@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import bookList from '../assets/book.js'
 import BookList from './lists/BookList'
 import NewBook from './representational/NewBook'
-import { Route, NavLink, Switch } from 'react-router-dom'
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom'
 import BookDetail from './representational/BookDetail'
 
 class MainComponent extends Component {
@@ -38,9 +38,10 @@ class MainComponent extends Component {
                     </ul>
                 </nav>
                 <Switch>
-                    <Route path="/" exact render={() => books} />
+                    <Route path="/books" exact render={() => books} />
                     <Route path="/new-book" exact component={NewBook} />
                     <Route path="/:id" render={() => <BookDetail book={this.state.selectedBook} />} />
+                    <Redirect from="/" to="/books" />
                 </Switch>
             </div>
         );
